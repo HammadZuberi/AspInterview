@@ -1,0 +1,38 @@
+﻿@model AlbumListPage
+@{
+    ViewData["Title"] = "Albums";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Albums" method="post">
+    <label>Artist:</label>
+    <input type="text" asp-for="Artist" value="@Model.Artist" />
+    <br />
+    <label>Start Date:</label>
+    <input type="date" name="StartDate" value="@Model.StartDate?.ToString("yyyy-MM-dd")" />
+    <br />
+    <label>End Date:</label>
+    <input type="date" name="EndDate" value="@Model.EndDate?.ToString("yyyy-MM-dd")" />
+    <br />
+    <button type="submit">Filter</button>
+</form>
+
+<table class="table table-bordered">
+    <tr>
+        <td>Title</td>
+        <td>Artist</td>
+        <td>Release Date</td>
+        <td>Songs</td>
+        <td>Details</td>
+    </tr>
+    @foreach (var album in Model.Albums)
+    {
+        <tr>
+            <td>@album.Title</td>
+            <td>@album.Artist</td>
+            <td>@album.ReleaseDate.ToString("yyyy-MM-dd")</td>
+            <td><a asp-action="SongsbyAlbum" asp-route-albumId="@album.Id"> @album.NumberOfSongs</a> </td>
+            <td><a asp-action="EditAlbum" asp-route-albumId="@album.Id">Edit</a></td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,42 @@
+﻿@model SongsListPage
+
+@{
+	ViewData["Title"] = "Songs";
+}
+<h1>@ViewData["Title"]</h1>
+
+@using (Html.BeginForm("Songs","Home",FormMethod.Get))
+{
+	<label>Sort By :</label>
+	<select class="form-select" name="sortBy">
+		<option value="artist">artist</option>
+		<option value="releasedate">Release Date</option>
+		<option value="lenght">Lenght</option>
+	</select>
+
+
+	<label>Filter By :</label>
+	<input type="number" name="lenght">
+
+	<button type="submit">Filter</button>
+}
+<br />
+<table class="table table-bordered table-hover">
+	<tr class="table-dark">
+		<td>Title</td>
+		<td>Artist</td>
+		<td>Album</td>
+		<td>Length</td>
+		@* <td>Details</td> *@
+	</tr>
+	@foreach (var song in Model.SongsList)
+	{
+		<tr>
+			<td>@song.Title</td>
+			<td>@song.Artists</td>
+			<td>@song.AlbumName</td>
+			<td>@song.LengthInSeconds</td>
+			@* <td><a asp-action="DeleteSong" asp-route-songid="@song.Id">Delete</a></td> *@
+		</tr>
+	}
+</table>

@@ -1,0 +1,11 @@
+﻿@model List<ReportModel>
+
+
+
+<h3>Albums Grouped by Year</h3>
+<br />
+@foreach (var report in Model)
+{
+	<label><span><b> @report.Year : </b></span>@(string.Join(',', @report.Album))</label>
+	<br />
+}

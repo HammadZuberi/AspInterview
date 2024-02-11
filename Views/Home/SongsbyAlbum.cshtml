@@ -1,0 +1,42 @@
+﻿@model SongsListPage
+
+@{
+	ViewData["Title"] = "Songs";
+	var AlbumId = @Model.SongsList.FirstOrDefault().AlbumId;
+	var AlbumName = @Model.SongsList.FirstOrDefault().AlbumName;
+}
+<div class="col-lg-12">
+
+	<h1>@ViewData["Title"]</h1>
+	<hr />
+	<div class="align-baseline">
+		<div class="align-content-lg-start">
+
+			<p><span>Album: </span><b>@AlbumName</b></p>
+		</div>
+
+		<div class="align-content-lg-end">
+			<a class="btn btn-dark" asp-action="AddSong" asp-route-albumId="@AlbumId">Add Songs</a>
+		</div>
+	</div>
+
+	<table class="table table-bordered">
+		<tr>
+			<td>Title</td>
+			<td>Artist</td>
+			<td>Album</td>
+			<td>Length</td>
+			<td>Details</td>
+		</tr>
+		@foreach (var song in Model.SongsList)
+		{
+			<tr>
+				<td>@song.Title</td>
+				<td>@song.Artists</td>
+				<td>@song.AlbumName</td>
+				<td>@song.LengthInSeconds</td>
+				<td><a asp-action="DeleteSong" asp-route-songid="@song.Id" asp-route-albumid="@AlbumId">Delete</a></td>
+			</tr>
+		}
+	</table>
+</div>
